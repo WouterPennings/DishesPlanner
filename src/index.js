@@ -11,18 +11,18 @@ app.get('/users', (req, res) => {
 
 // Recommends a user to do the dishes
 app.get('/recommended', (req, res) => {
-  let lowestAmountUser = "";
-  let lowestAmount = 0;
+  let highestAmountUser = "";
+  let highestAmount = 0;
   try{
     const data = GetUsers();
     console.log(data);
-    lowestAmountUser = GetLowestUserName(data);
-    lowestAmount = GetUserAmount(data, lowestAmountUser);
+    highestAmountUser = GetHighestUserName(data);
+    highestAmount = GetUserAmount(data, highestAmountUser);
   }
   catch(err){
     console.log(err);
   }
-  const jsonReturn = `{"user": "${lowestAmountUser}","Amount": ${lowestAmount}}`
+  const jsonReturn = `{"user": "${highestAmountUser}","Amount": ${highestAmount}}`
   res.send(JSON.parse(jsonReturn));
 });
 
@@ -63,6 +63,7 @@ function OneUpUser(data, name){
 function ReCalibrateAmounts(data){
   const name = GetLowestUserName(data);
   const amount = GetUserAmount(data, name);
+  console.log("Name: " + name + " Amount: " + amount);
   let count = Object.keys(data).length;
   for(var i = 0; i < count; i++) data[i].slagging -= amount;
 
@@ -73,7 +74,7 @@ function ReCalibrateAmounts(data){
 }
 
 function GetLowestUserName(data){
-  let lowestAmount = 1000000;
+  let lowestAmount = 100000;
   let lowestAmountUser = "";
   let count = Object.keys(data).length;
   for(var i = 0; i < count; i++) {
@@ -84,6 +85,20 @@ function GetLowestUserName(data){
     }
   }
   return lowestAmountUser;
+}
+
+function GetHighestUserName(data){
+  let highestAmount = -1;
+  let highestAmountUser = "";
+  let count = Object.keys(data).length;
+  for(var i = 0; i < count; i++) {
+    let count = data[i].slagging;
+    if(count > highestAmount){
+        highestAmount = count;
+        highestAmountUser = data[i].name;
+    }
+  }
+  return highestAmountUser;
 }
 
 function GetUserAmount(x, lowestName){
