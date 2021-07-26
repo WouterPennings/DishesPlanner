@@ -6,7 +6,7 @@ const port = process.env.PORT || 5000
 
 // Ask all the users
 app.get('/users', (req, res) => {
-  res.send(GetUsers());
+  res.send(GetUsers(), 200);
 });
 
 // Recommends a user to do the dishes
@@ -23,7 +23,7 @@ app.get('/recommended', (req, res) => {
     console.log(err);
   }
   const jsonReturn = `{"user": "${highestAmountUser}","Amount": ${highestAmount}}`
-  res.send(JSON.parse(jsonReturn));
+  res.send(JSON.parse(jsonReturn), 200);
 });
 
 // Add 1 to the counter of a user
@@ -34,12 +34,12 @@ app.get('/dishes/:name', (req, res) => {
   if(user != null) {
     const data = GetUsers();
     const response = OneUpUser(data, name);
-    if (response) res.send("Something went wrong");
+    if (response) res.send("Something went wrong", 500);
     const x = ReCalibrateAmounts(data);
-    if (x) res.send("Something went wrong");
-    else res.send(`${name} has been one upped`)
+    if (x) res.send("Something went wrong", 500);
+    else res.send(`${name} has been one upped`, 200)
   }
-  else res.send("User does not excist");
+  else res.send("User does not exist", 400);
 });
 
 app.listen(port, () => {
