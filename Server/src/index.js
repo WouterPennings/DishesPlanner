@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 
 const app = express();
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
 
 // Ask all the users
 app.get('/users', (req, res) => {
@@ -42,9 +42,7 @@ app.get('/dishes/:name', (req, res) => {
   else res.send("User does not exist", 400);
 });
 
-app.listen(port, () => {
-  console.log(`App listing on: http://localhost:${port}`);
-});
+// Functions 
 
 function OneUpUser(data, name){
   let count = Object.keys(data).length;

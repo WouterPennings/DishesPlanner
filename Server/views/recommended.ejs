@@ -1,0 +1,18 @@
+<html>
+    <header>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+    </header>
+    <head>
+
+    </head>
+    <body>
+        <h1 class="text">Recommended: <%= name %></h1>
+        <% users.forEach(function(user) { %>
+            <form action="/dishes" method="post">
+                <input type="hidden" id="a" name="name" value="<%= user.name %>">
+                <input type="submit" value="<%= user.name %>">
+            </form>
+            <p>Slagging: <%= user.slagging %></p><br>
+        <% }); %>
+    </body>
+</html>
