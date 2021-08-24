@@ -11,15 +11,7 @@ app.use(express.urlencoded({extended: false}))
 
 const databaseUsers = "db/users.json";
 
-app.get('/', (req, res) => {
-    console.log("User is at home")
-    var name = "Wouters";
-    res.render('home', {
-        name: name
-    });
-})
-
-app.get('/recommended' , (req, res) => {
+app.get('/' , (req, res) => {
     let highestAmountUser = "";
     let highestAmount = 0;
     let data;
@@ -32,7 +24,7 @@ app.get('/recommended' , (req, res) => {
     catch(err){
         console.log(err);
     }
-    res.render('recommended', {
+    res.render('', {
         name: highestAmountUser,
         users: data
     });
