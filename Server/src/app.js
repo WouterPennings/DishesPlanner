@@ -11,20 +11,23 @@ app.use(express.urlencoded({extended: false}))
 
 const databaseUsers = "db/users.json";
 
-app.get('/' , (req, res) => {
+app.get('/', (req, res) => {
+    res.redirect('/home');
+});
+
+app.get('/home' , (req, res) => {
     let highestAmountUser = "";
     let highestAmount = 0;
     let data;
     try{
         data = GetUsers();
-        console.log(data);
         highestAmountUser = GetHighestUserName(data);
         highestAmount = GetUserAmount(data, highestAmountUser);
     }
     catch(err){
         console.log(err);
     }
-    res.render('', {
+    res.render('recommended', {
         name: highestAmountUser,
         users: data
     });
@@ -40,16 +43,10 @@ app.post('/dishes', (req, res) => {
       if (response) res.send("Something went wrong", 500);
       const x = ReCalibrateAmounts(data);
       if (x) res.send("Something went wrong", 500);
-      else res.redirect("/recommended");
+      else res.redirect("/home")
     }
     else res.send("User does not exist", 400);
 });
-
-app.post('/name', (req, res) => {
-    var body = req.body;
-    console.log(body);
-    res.send(body);
-})
 
 app.listen(port, () => {
     console.log(`App listing on: http://localhost:${port}`);
@@ -65,7 +62,7 @@ function OneUpUser(data, name){
             data[i].slagging += 1;
         }
     }
-    fs.writeFile('db/users.json', JSON.stringify(data), err => { // Change location to VAR
+    fs.writeFile(databaseUsers, JSON.stringify(data), err => { // Change location to VAR
         if(err) return false;
         return true;
     });
@@ -78,7 +75,7 @@ function ReCalibrateAmounts(data){
     let count = Object.keys(data).length;
     for(var i = 0; i < count; i++) data[i].slagging -= amount;
 
-    fs.writeFile('db/users.json', JSON.stringify(data), err => { // Change location to VAR
+    fs.writeFile(databaseUsers, JSON.stringify(data), err => { // Change location to VAR
         if(err) return false;
         return true;
     });
@@ -122,5 +119,5 @@ function GetUserAmount(x, lowestName){
 }
 
 function GetUsers(){
-    return JSON.parse(fs.readFileSync('db/users.json')); // Change location to VAR
+    return JSON.parse(fs.readFileSync(databaseUsers)); // Change location to VAR
 }
