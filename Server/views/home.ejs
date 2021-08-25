@@ -3,14 +3,25 @@
         <link rel="stylesheet" type="text/css" href="css/styles.css">
     </header>
     <head>
-
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
     </head>
     <body>
-        <p class="text"><%= name %></p>
-        <form action="/name" method="post">
-            <input type="text" id="b" name="fname"><br><br>
-            <input type="text" id="a" name="lname"><br>
-            <input type="submit" value="Submit">
-        </form>
+        <div class="container">
+            <h1 class="text">Recommended: <%= name %></h1>
+            <hr class="thin">
+            <% users.forEach(function(user) { %>
+                <div class="box">
+                    <form action="/dishes" method="post">
+                        <input class="text" type="hidden" id="a" name="name" value="<%= user.name %>">
+                        <button class="btn info"><%= user.name %></button>
+                    </form>
+                    <p class="text">Slagging <%= user.slagging %></p>
+                 </div>
+            <% }); %>
+            <br><br>
+            <h1 class="text">DishesPlanner</h1>
+        </div>
     </body>
 </html>

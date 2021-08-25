@@ -27,7 +27,7 @@ app.get('/home' , (req, res) => {
     catch(err){
         console.log(err);
     }
-    res.render('recommended', {
+    res.render('home', {
         name: highestAmountUser,
         users: data
     });

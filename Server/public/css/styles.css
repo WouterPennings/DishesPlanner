@@ -1,1 +1,58 @@
+@media screen and (max-width: 900px) {
+    
+    div.container{
+        margin: 0 10px 0 10px;   
+    }
+}
 
+hr.thin {
+    border-top: 1px solid grey;
+}
+
+.text {
+    font-family: 'Roboto Mono', monospace;
+}
+
+.container {
+    margin: 0 20vh 0 20vh;
+}
+
+.box {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    background-color: lightgray;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    
+    padding: 4px 6px 4px 6px;
+    margin-bottom: 3px; 
+    height: 25px;
+}
+.text {
+    font-family: 'Roboto Mono', monospace;
+    color: black;
+    margin: 0 0 0 0;
+}
+
+.info{
+    color: black;
+}
+
+.btn {
+    font-family: 'Roboto Mono', monospace;
+ 
+    background-color: white;
+
+    border-radius: 3px;
+    border: 1px solid black;
+
+    height: 25px;
+    margin: 0 0 0 0;
+}
+
+.btn:hover {
+    background-color: lightgray;   
+}

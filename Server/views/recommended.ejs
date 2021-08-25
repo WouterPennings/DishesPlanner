@@ -6,13 +6,14 @@
 
     </head>
     <body>
-        <h1 class="text">Recommended: <%= name %></h1>
+        <h1> THIS SI THE WRONG ONE!!!!! WHY IS THIS SHOWING </h1>
+        <h1 class="userName">Recommended: <%= name %></h1>
         <% users.forEach(function(user) { %>
-            <form action="/dishes" method="post">
+            <form action="/dishes" method="post">         
                 <input type="hidden" id="a" name="name" value="<%= user.name %>">
-                <input type="submit" value="<%= user.name %>">
-            </form>
-            <p>Slagging: <%= user.slagging %></p><br>
+                <input class="button" type="submit" value="<%= user.name %>">
+                <p>Slagging: <%= user.slagging %></p><br>
+            </form>    
         <% }); %>
     </body>
 </html>
