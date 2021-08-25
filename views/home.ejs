@@ -14,7 +14,7 @@
             <% users.forEach(function(user) { %>
                 <div class="box">
                     <form action="/dishes" method="post">
-                        <input class="text" type="hidden" id="a" name="name" value="<%= user.name %>">
+                        <input type="hidden" id="a" name="name" value="<%= user.name %>">
                         <button class="btn info"><%= user.name %></button>
                     </form>
                     <p class="text">Slagging <%= user.slagging %></p>
